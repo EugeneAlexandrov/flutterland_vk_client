@@ -10,7 +10,7 @@ class AuthScreen extends StatelessWidget {
         title: const Text('VK TEST_ENTRY_POINT_1'),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+        padding: const EdgeInsets.only(top: 56, left: 24, right: 24),
         child: Column(
           children: [
             const TextField(
@@ -18,7 +18,7 @@ class AuthScreen extends StatelessWidget {
                   border: OutlineInputBorder(), hintText: 'Login'),
             ),
             const SizedBox(
-              height: 10,
+              height: 8,
             ),
             const TextField(
               decoration: InputDecoration(
@@ -26,17 +26,22 @@ class AuthScreen extends StatelessWidget {
               obscureText: true,
             ),
             const SizedBox(
-              height: 15,
+              height: 16,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(onPressed: () {}, child: const Text('Войти')),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Войти'),
+                ),
                 const SizedBox(
-                  width: 10,
+                  width: 8,
                 ),
                 ElevatedButton(
-                    onPressed: () {}, child: const Text('Авторизоваться')),
+                  onPressed: () {},
+                  child: const Text('Авторизоваться'),
+                ),
               ],
             ),
           ],
