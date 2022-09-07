@@ -1,3 +1,6 @@
+
+import 'package:flutterland_vk_client/core/services/http_client.dart';
+import 'package:flutterland_vk_client/core/services/shared_preferences_service.dart';
 import 'package:flutterland_vk_client/test/screen_and_block_example/presentation/cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -13,14 +16,17 @@ Future setupLocator() async {
 }
 
 void _setupServices() {
-  //TODO: initialize HttpClient
-  //TODO: initialize SharedPreferencesService
+  locator.registerSingleton(HttpClientService());
+  locator.registerSingleton(SharedPreferencesService());
 }
 
 void _setupBlocs() {
   locator.registerSingleton(ExampleCubit());
+
 }
 
 void resetLocator() {
   locator.resetLazySingleton<ExampleCubit>();
+
+
 }
