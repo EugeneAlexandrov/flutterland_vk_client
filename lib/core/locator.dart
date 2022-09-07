@@ -1,10 +1,6 @@
 
-import 'package:flutterland_vk_client/core/services/http_client.dart';
-import 'package:flutterland_vk_client/core/services/shared_preferences_service.dart';
 import 'package:flutterland_vk_client/test/screen_and_block_example/presentation/cubit.dart';
 import 'package:get_it/get_it.dart';
-
-import '../presentation/main_screen/cubit.dart';
 
 final GetIt locator = GetIt.instance;
 bool isLocatorInitialized = false;
@@ -23,10 +19,11 @@ void _setupServices() {
 }
 
 void _setupBlocs() {
-  locator.registerSingleton(BottomNavCubit());
+  locator.registerSingleton(ExampleCubit());
 
 
 void resetLocator() {
-  locator.resetLazySingleton<BottomNavCubit>();
-}
+  locator.resetLazySingleton<ExampleCubit>();
+
+
 }
