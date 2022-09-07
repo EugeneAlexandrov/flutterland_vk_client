@@ -39,7 +39,7 @@ class _AuthScreenState extends State<AuthScreen> {
       _token = token;
       _iD = iD;
     } else {
-      log('Error with token response');
+      log('Error token response');
     }
 
     setState(() {});
