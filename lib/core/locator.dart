@@ -1,6 +1,4 @@
 
-import 'package:flutterland_vk_client/core/services/http_client.dart';
-import 'package:flutterland_vk_client/core/services/shared_preferences_service.dart';
 import 'package:flutterland_vk_client/test/screen_and_block_example/presentation/cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -23,7 +21,6 @@ void _setupServices() {
 void _setupBlocs() {
   locator.registerSingleton(ExampleCubit());
 
-}
 
 void resetLocator() {
   locator.resetLazySingleton<ExampleCubit>();
