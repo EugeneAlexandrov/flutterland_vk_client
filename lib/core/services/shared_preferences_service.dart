@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:shared_preferences/shared_preferences.dart';
-
+const String vkToken = 'vkToken';
+const String vkId = 'vkId';
 class SharedPreferencesService {
+
+
   final StreamController<String> _keys$ = StreamController.broadcast();
 
   Stream<String?> onChange$(String key) async* {

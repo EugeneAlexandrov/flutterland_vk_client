@@ -1,7 +1,8 @@
-
 import 'package:flutterland_vk_client/core/services/http_client.dart';
 import 'package:flutterland_vk_client/core/services/shared_preferences_service.dart';
-import 'package:flutterland_vk_client/test/screen_and_block_example/presentation/cubit.dart';
+import 'package:flutterland_vk_client/data/repositories/oauth_repo.dart';
+import 'package:flutterland_vk_client/presentation/authorisation/oauth_cubit.dart';
+
 import 'package:get_it/get_it.dart';
 
 import '../presentation/main_screen/cubit.dart';
@@ -12,7 +13,9 @@ bool isLocatorInitialized = false;
 Future setupLocator() async {
   await locator.reset();
   _setupServices();
+  _setupRepositories();
   _setupBlocs();
+
   isLocatorInitialized = true;
   return isLocatorInitialized;
 }
@@ -24,9 +27,16 @@ void _setupServices() {
 
 void _setupBlocs() {
   locator.registerSingleton(BottomNavCubit());
-
-
-void resetLocator() {
-  locator.resetLazySingleton<BottomNavCubit>();
+  locator.registerSingleton(AuthCubit(authRepo: locator.get()));
 }
+
+void _setupRepositories() {
+  locator.registerSingleton(
+    AuthRepo(
+      httpClient: locator.get(),
+      sharedPreferencesService: locator.get(),
+    ),
+  );
 }
+
+void resetLocator() {}

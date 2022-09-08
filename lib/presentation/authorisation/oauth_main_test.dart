@@ -4,26 +4,26 @@ import 'package:flutterland_vk_client/presentation/authorisation/oauth_screen.da
 
 import '../../core/locator.dart';
 
-void main() {
 
-  runApp(FutureBuilder(
-    future: setupLocator(),
-    builder: (context, snapshot) {
-      return const AuthScreenTest();
-    },
-  ),
+void main() {
+  runApp(
+    FutureBuilder(
+      future: setupLocator(),
+      builder: (context, snapshot) {
+        return const AuthScreenTest();
+      },
+    ),
   );
 }
+
 class AuthScreenTest extends StatelessWidget {
   const AuthScreenTest({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Bottom Bar',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
       home: const AuthScreen(),
