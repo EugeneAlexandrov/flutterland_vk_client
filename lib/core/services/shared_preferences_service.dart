@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 const String vkToken = 'vkToken';
 const String vkId = 'vkId';
+const String access = 'access';
 class SharedPreferencesService {
 
 

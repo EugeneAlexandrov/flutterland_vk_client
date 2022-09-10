@@ -3,7 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutterland_vk_client/presentation/friends_screen/screen.dart';
 import 'package:flutterland_vk_client/presentation/news_screen/screen.dart';
-import 'package:flutterland_vk_client/presentation/user_page_screen/screen.dart';
+import 'package:flutterland_vk_client/presentation/user_page_screen/user_page_screen.dart';
 
 class MainScreenDrawer extends StatefulWidget {
   const MainScreenDrawer({Key? key}) : super(key: key);

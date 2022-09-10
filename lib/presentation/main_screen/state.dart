@@ -1,9 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 
-import '../friends_screen/screen.dart';
-import '../news_screen/screen.dart';
-import '../user_page_screen/screen.dart';
 
 class BottomNavScreenState extends Equatable {
   final int selectedIndex;

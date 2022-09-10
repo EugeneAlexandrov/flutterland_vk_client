@@ -13,11 +13,12 @@ class AuthRepo {
 
   String? get token => _token;
 
-
   String? get id => _iD;
 
-
-
+  AuthRepo({
+    required this.httpClient,
+    required this.sharedPreferencesService,
+  });
 
   void readResponse(String value) {
     if (value.contains('access_token=')) {
@@ -39,18 +40,18 @@ class AuthRepo {
 
       _token = token;
       _iD = iD;
-      log('token: $_token');
 
-      if (_token != null) {
+      if (_token != null && _iD != null) {
         sharedPreferencesService.setString(vkToken, _token!);
-      }
-      if (_iD != null) {
-        sharedPreferencesService.setString(vkId, iD);
+        sharedPreferencesService.setString(vkId, _iD!);
+        sharedPreferencesService.setBool(access, true);
       }
     } else {
       log('Error token response');
     }
   }
 
-  AuthRepo({required this.httpClient, required this.sharedPreferencesService});
+  Future<bool> getAccess() {
+    return sharedPreferencesService.getBool(access).then((value) => value!);
+  }
 }

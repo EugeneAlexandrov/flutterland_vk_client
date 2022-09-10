@@ -7,7 +7,7 @@ import 'package:flutterland_vk_client/presentation/friends_screen/screen.dart';
 import 'package:flutterland_vk_client/presentation/main_screen/cubit.dart';
 import 'package:flutterland_vk_client/presentation/main_screen/state.dart';
 import 'package:flutterland_vk_client/presentation/news_screen/screen.dart';
-import 'package:flutterland_vk_client/presentation/user_page_screen/screen.dart';
+import 'package:flutterland_vk_client/presentation/user_page_screen/user_page_screen.dart';
 
 import '../../core/locator.dart';
 

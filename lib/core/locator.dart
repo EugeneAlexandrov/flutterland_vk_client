@@ -1,7 +1,9 @@
 import 'package:flutterland_vk_client/core/services/http_client.dart';
 import 'package:flutterland_vk_client/core/services/shared_preferences_service.dart';
 import 'package:flutterland_vk_client/data/repositories/oauth_repo.dart';
-import 'package:flutterland_vk_client/presentation/authorisation/oauth_cubit.dart';
+import 'package:flutterland_vk_client/data/repositories/user_page_repo.dart';
+import 'package:flutterland_vk_client/presentation/authorisation/auth_cubit.dart';
+import 'package:flutterland_vk_client/presentation/user_page_screen/user_page_cubit.dart';
 
 import 'package:get_it/get_it.dart';
 
@@ -27,7 +29,14 @@ void _setupServices() {
 
 void _setupBlocs() {
   locator.registerSingleton(BottomNavCubit());
-  locator.registerSingleton(AuthCubit(authRepo: locator.get()));
+
+  locator.registerSingleton(AuthCubit(
+    authRepo: locator.get(),
+    sharedPreferencesService: locator.get(),
+  ));
+  locator.registerSingleton(UserPageCubit(
+    userRepo: locator.get(),
+  ));
 }
 
 void _setupRepositories() {
@@ -37,6 +46,10 @@ void _setupRepositories() {
       sharedPreferencesService: locator.get(),
     ),
   );
+  locator.registerSingleton(UserRepo(
+    httpClient: locator.get(),
+    sharedPreferencesService: locator.get(),
+  ));
 }
 
 void resetLocator() {}

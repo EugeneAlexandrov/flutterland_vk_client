@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterland_vk_client/presentation/authorisation/oauth_screen.dart';
+import 'package:flutterland_vk_client/presentation/authorisation/auth_screen.dart';
 
 import '../../core/locator.dart';
 
