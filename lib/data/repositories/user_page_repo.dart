@@ -15,7 +15,7 @@ class UserRepo {
     final token = await sharedPreferencesService.getString(vkToken);
     final id = await sharedPreferencesService.getString(vkId);
     final response = await httpClient.executeGet(
-        'https://api.vk.com/method/users.get?user_ids=$id&fields=bdate&access_token=$token&v=5.131');
+        'https://api.vk.com/method/users.get?user_ids=$id&fields=bdate,photo_max_orig,country,city,relation&access_token=$token&v=5.131');
     if (response.statusCode == 200) {
       final userInfo = UserInfoList.fromJson(response.data);
 

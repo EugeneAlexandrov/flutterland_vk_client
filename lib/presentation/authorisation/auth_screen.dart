@@ -18,6 +18,7 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     locator.get<AuthCubit>().initState();
 
+
     return Scaffold(
       body: BlocBuilder<AuthCubit, AuthState>(
         bloc: locator.get<AuthCubit>(),
@@ -53,8 +54,9 @@ class AuthWebView extends StatelessWidget {
                 javascriptMode: JavascriptMode.unrestricted,
                 gestureNavigationEnabled: true,
                 onPageStarted: (value) {},
-                onPageFinished: (value) {
+                onPageFinished: (value) async {
                   locator.get<AuthCubit>().onAuthPageFinished(value);
+
                 },
               ),
             ),

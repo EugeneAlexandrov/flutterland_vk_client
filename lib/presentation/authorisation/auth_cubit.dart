@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutterland_vk_client/presentation/authorisation/auth_state.dart';
@@ -17,7 +16,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   void onAuthPageFinished(String value) {
     authRepo.readResponse(value);
-
     if (authRepo.token != null && authRepo.id != null) {
       emit(state.copyWith(isTokenAvailable: true));
     }
@@ -27,5 +25,10 @@ class AuthCubit extends Cubit<AuthState> {
     authRepo
         .getAccess()
         .then((value) => emit(state.copyWith(isTokenAvailable: value)));
+  }
+
+  void changeToken() {
+    authRepo.changeToken();
+    emit(state.copyWith(isTokenAvailable: false));
   }
 }

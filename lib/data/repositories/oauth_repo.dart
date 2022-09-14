@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutterland_vk_client/core/services/http_client.dart';
@@ -10,6 +11,8 @@ class AuthRepo {
       'https://oauth.vk.com/authorize?client_id=8212104&display=mobile&redirect_uri=https://oauth.vk.com/blank.html&scope=video&response_type=token&v=5.131&state=123456';
   String? _token;
   String? _iD;
+
+  StreamSubscription<String>? subscription;
 
   String? get token => _token;
 
@@ -45,13 +48,19 @@ class AuthRepo {
         sharedPreferencesService.setString(vkToken, _token!);
         sharedPreferencesService.setString(vkId, _iD!);
         sharedPreferencesService.setBool(access, true);
+        log('id: $_iD  token: $_token');
       }
     } else {
+      sharedPreferencesService.setBool(access, false);
       log('Error token response');
     }
   }
 
   Future<bool> getAccess() {
     return sharedPreferencesService.getBool(access).then((value) => value!);
+  }
+
+  void changeToken() {
+    sharedPreferencesService.setBool(access, false);
   }
 }

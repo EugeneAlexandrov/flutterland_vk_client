@@ -28,14 +28,20 @@ class User {
   String? lastName;
   bool? canAccessClosed;
   bool? isClosed;
+  String? photo;
+  Country? country;
+  City? city;
 
   User(
       {this.id,
-        this.bdate,
-        this.firstName,
-        this.lastName,
-        this.canAccessClosed,
-        this.isClosed});
+      this.bdate,
+      this.firstName,
+      this.lastName,
+      this.canAccessClosed,
+      this.isClosed,
+      this.photo,
+      this.country,
+      this.city});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -44,6 +50,9 @@ class User {
     lastName = json['last_name'];
     canAccessClosed = json['can_access_closed'];
     isClosed = json['is_closed'];
+    photo = json['photo_max_orig'];
+    city = City.fromJson(json['city']);
+    country = Country.fromJson(json['country']);
   }
 
   Map<String, dynamic> toJson() {
@@ -54,8 +63,37 @@ class User {
     data['last_name'] = this.lastName;
     data['can_access_closed'] = this.canAccessClosed;
     data['is_closed'] = this.isClosed;
+    data['photo_max_orig'] = this.photo;
     return data;
   }
+}
 
+class City {
+  int? id;
+  String? title;
 
+  City({
+    this.id,
+    this.title,
+  });
+
+  City.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+  }
+}
+
+class Country {
+  int? id;
+  String? title;
+
+  Country({
+    this.id,
+    this.title,
+  });
+
+  Country.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+  }
 }

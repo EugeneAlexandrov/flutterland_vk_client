@@ -24,7 +24,7 @@ class AuthScreenTest extends StatelessWidget {
     return MaterialApp(
       title: 'Bottom Bar',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
       home: const AuthScreen(),
     );
