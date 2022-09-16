@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutterland_vk_client/presentation/authorisation/auth_cubit.dart';
 
 import 'package:flutterland_vk_client/presentation/friends_screen/screen.dart';
 import 'package:flutterland_vk_client/presentation/main_screen/cubit.dart';
@@ -30,7 +31,15 @@ class MainScreenBottomNavBar extends StatelessWidget {
         bloc: locator.get<BottomNavCubit>(),
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(title: const Text('Main Screen')),
+            appBar: AppBar(
+              title: const Text('Main Screen'),
+              actions: [
+                ElevatedButton(
+                  onPressed: () => locator.get<AuthCubit>().onTapExit(),
+                  child: const Text('exit'),
+                ),
+              ],
+            ),
             body: _pages[state.selectedIndex],
             bottomNavigationBar: BottomNavigationBar(
               items: const [

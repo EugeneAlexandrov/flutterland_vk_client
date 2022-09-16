@@ -2,27 +2,25 @@ import 'package:equatable/equatable.dart';
 
 class AuthState extends Equatable {
   final bool isTokenAvailable;
+  final bool isLogout;
 
+  const AuthState._({required this.isTokenAvailable, required this.isLogout});
 
-  const AuthState._({
-    this.isTokenAvailable = false,
-
-  });
-
-  const AuthState.initial() : this._(isTokenAvailable: false);
+  const AuthState.initial() : this._(isTokenAvailable: true, isLogout: false);
 
   AuthState copyWith({
     bool? isTokenAvailable,
-
+    bool? isLogout,
   }) {
     return AuthState._(
       isTokenAvailable: isTokenAvailable ?? this.isTokenAvailable,
-
+      isLogout: isLogout ?? this.isLogout,
     );
   }
 
   @override
   List<Object?> get props => [
-    isTokenAvailable,
+        isTokenAvailable,
+        isLogout,
       ];
 }

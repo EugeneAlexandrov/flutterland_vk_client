@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterland_vk_client/core/locator.dart';
+
 
 import 'package:flutterland_vk_client/presentation/authorisation/auth_cubit.dart';
 import 'package:flutterland_vk_client/presentation/authorisation/auth_state.dart';
@@ -9,15 +12,13 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:flutter/cupertino.dart';
 
-
-
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    locator.get<AuthCubit>().initState();
-
+    //locator.get<AuthCubit>().initState();
+    locator.get<AuthCubit>().onAuthScreenStarted();
 
     return Scaffold(
       body: BlocBuilder<AuthCubit, AuthState>(
@@ -26,7 +27,9 @@ class AuthScreen extends StatelessWidget {
           if (state.isTokenAvailable) {
             return const MainScreenBottomNavBar();
           } else {
-            return const AuthWebView();
+            return AuthWebView(
+              isLogout: state.isLogout,
+            );
           }
         },
       ),
@@ -35,34 +38,37 @@ class AuthScreen extends StatelessWidget {
 }
 
 class AuthWebView extends StatelessWidget {
-  const AuthWebView({Key? key}) : super(key: key);
+  final bool isLogout;
+
+  const AuthWebView({
+    Key? key,
+    required this.isLogout,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Center(
-            child: SizedBox(
-              height: 500,
-              width: 400,
-              child: WebView(
-                initialUrl: locator.get<AuthCubit>().authRepo.initialUrl,
-                onWebViewCreated: (WebViewController controller) {
-                  // _controller = controller;
-                },
-                javascriptMode: JavascriptMode.unrestricted,
-                gestureNavigationEnabled: true,
-                onPageStarted: (value) {},
-                onPageFinished: (value) async {
-                  locator.get<AuthCubit>().onAuthPageFinished(value);
+    log('webview was build');
 
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
+    return WebView(
+      initialUrl: locator.get<AuthCubit>().getInitialUrl(),
+      onWebViewCreated: (WebViewController controller) {
+        locator.get<AuthCubit>().getController().complete(controller);
+        if (isLogout) {
+          controller.clearCache();
+          final cookieManager = CookieManager();
+          cookieManager.clearCookies();
+          controller.reload();
+        }
+      },
+      javascriptMode: JavascriptMode.unrestricted,
+      gestureNavigationEnabled: true,
+      onPageStarted: (value) {
+        log('он пейдж стартед');
+      },
+      onPageFinished: (value) {
+        log('он пейдж финишед');
+        locator.get<AuthCubit>().onAuthPageFinished(value);
+      },
     );
   }
 }

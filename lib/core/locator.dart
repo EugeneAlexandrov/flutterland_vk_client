@@ -1,6 +1,6 @@
 import 'package:flutterland_vk_client/core/services/http_client.dart';
 import 'package:flutterland_vk_client/core/services/shared_preferences_service.dart';
-import 'package:flutterland_vk_client/data/repositories/oauth_repo.dart';
+import 'package:flutterland_vk_client/data/repositories/auth_repo.dart';
 import 'package:flutterland_vk_client/data/repositories/user_page_repo.dart';
 import 'package:flutterland_vk_client/presentation/authorisation/auth_cubit.dart';
 import 'package:flutterland_vk_client/presentation/user_page_screen/user_page_cubit.dart';

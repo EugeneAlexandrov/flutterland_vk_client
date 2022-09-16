@@ -3,7 +3,6 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterland_vk_client/core/locator.dart';
-import 'package:flutterland_vk_client/presentation/authorisation/auth_cubit.dart';
 
 import 'package:flutterland_vk_client/presentation/user_page_screen/user_page_cubit.dart';
 import 'package:flutterland_vk_client/presentation/user_page_screen/user_page_state.dart';
@@ -32,11 +31,7 @@ class UserPageScreenWidget extends StatelessWidget {
                     ? UserInfoWidget(
                         user: state.userInfo!,
                       )
-                    // :  const AuthScreen(),
-                    : ElevatedButton(
-                        onPressed: () => locator.get<AuthCubit>().changeToken(),
-                        child: const Text('reload'))
-                //Center(child: Text('zzzz...')),
+                    : const Center(child: Text('zzzz...')),
               ],
             );
           }),
@@ -56,15 +51,17 @@ class UserInfoWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            child: ClipRRect(
-              child: Image.network(
-                '${user.photo}',
+          CircleAvatar(
+            radius: 80,
+            backgroundColor: Colors.blueGrey,
+            child: Padding(
+              padding: const EdgeInsets.all(2),
+              child: ClipOval(
+                child: Image.network(
+                  '${user.photo}',
+                ),
               ),
-              borderRadius: BorderRadius.circular(100),
             ),
-            width: 160,
-            height: 160,
           ),
           const SizedBox(
             width: 16,

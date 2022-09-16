@@ -3,10 +3,13 @@ import 'dart:developer';
 
 import 'package:flutterland_vk_client/core/services/http_client.dart';
 import 'package:flutterland_vk_client/core/services/shared_preferences_service.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class AuthRepo {
   final HttpClientService httpClient;
   final SharedPreferencesService sharedPreferencesService;
+  final Completer<WebViewController> controller =
+      Completer<WebViewController>();
   final initialUrl =
       'https://oauth.vk.com/authorize?client_id=8212104&display=mobile&redirect_uri=https://oauth.vk.com/blank.html&scope=video&response_type=token&v=5.131&state=123456';
   String? _token;
@@ -24,6 +27,7 @@ class AuthRepo {
   });
 
   void readResponse(String value) {
+    log('readResponse method');
     if (value.contains('access_token=')) {
       final str = value;
       const startToken = "token=";
@@ -46,21 +50,30 @@ class AuthRepo {
 
       if (_token != null && _iD != null) {
         sharedPreferencesService.setString(vkToken, _token!);
+        log('токен добавили в шаред преф');
         sharedPreferencesService.setString(vkId, _iD!);
         sharedPreferencesService.setBool(access, true);
         log('id: $_iD  token: $_token');
       }
     } else {
-      sharedPreferencesService.setBool(access, false);
+      //sharedPreferencesService.setBool(access, false);
       log('Error token response');
     }
   }
 
-  Future<bool> getAccess() {
-    return sharedPreferencesService.getBool(access).then((value) => value!);
+  Stream<bool> onAuthChanged() {
+    return sharedPreferencesService
+        .onChange$(vkToken)
+        .map((event) => event != null && event.isNotEmpty);
   }
 
-  void changeToken() {
-    sharedPreferencesService.setBool(access, false);
+  void clearToken() {
+    sharedPreferencesService.remove(vkToken);
+    _token = null;
+    _iD = null;
   }
+
+  // void changeToken() {
+  //   sharedPreferencesService.setBool(access, false);
+  // }
 }
